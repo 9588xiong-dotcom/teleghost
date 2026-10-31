@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#090d16">
+    <meta name="description" content="TeleGhost revives the lost art of Teletext in a modern, keyboard-first information terminal.">
+    <title>TeleGhost — Teletext Reborn</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#100" aria-label="TeleGhost home, page 100">
+          <span class="brand-icon" aria-hidden="true">▣</span>
+          <span>TELE<span class="ghost">GHOST</span></span>
+        </a>
+        <span class="top-label">THE INTERNET, BEFORE THE INTERNET</span>
+        <span class="edition">ISSUE 001 <span class="signal-dot" aria-hidden="true"></span> <span class="edition-status">DEMO</span></span>
+      </header>
+
+      <main class="main-layout">
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="eyebrow"><span class="eyebrow-line" aria-hidden="true"></span> RESURRECTION / 2026</div>
+          <h1 id="hero-title">THE PAST<br>IS <em>ONLINE.</em></h1>
+          <p>The lost art of Teletext, reimagined for the modern web. Numbered pages. Zero distractions. Pure information.</p>
+          <div class="hero-tip"><span class="tip-prompt" aria-hidden="true">&gt;_</span> TYPE A 3-DIGIT PAGE NUMBER TO BEGIN</div>
+        </section>
+
+        <section class="terminal-frame" aria-label="Interactive Teletext terminal">
+          <div class="frame-top"><span class="frame-id">TG–01 / INFORMATION TERMINAL</span><span class="frame-lights" aria-hidden="true"><i></i><i></i><i></i></span></div>
+          <div class="screen">
+            <div class="scanlines" aria-hidden="true"></div>
+            <div class="screen-content">
+              <div class="teletext-topline">
+                <strong class="station">TELEGHOST</strong>
+                <span class="page-readout">P<span id="page-number">100</span></span>
+                <span class="clock" id="clock">--:--:--</span>
+              </div>
+              <div class="rainbow" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+              <div class="page-heading"><div class="page-eyebrow" id="page-eyebrow"></div><h2 id="page-title"></h2><div class="section-label" id="section-label"></div></div>
+              <div class="page-intro" id="page-intro"></div>
+              <div class="page-list" id="page-list" aria-live="off"></div>
+              <div class="page-note" id="page-note"></div>
+              <div class="teletext-footer"><span>◀ PREV</span><span>PAGE <span id="page-footer">100</span></span><span>NEXT ▶</span></div>
+            </div>
+          </div>
+          <div class="controls">
+            <div class="controls-intro"><div class="controls-label">PAGE SELECTOR</div><div class="controls-hint">NUMBER + ENTER</div></div>
+            <form id="page-form" class="page-entry" autocomplete="off">
+              <label class="sr-only" for="page-input">Page number, three digits</label>
+              <input id="page-input" type="text" inputmode="numeric" maxlength="3" pattern="[0-9]{3}" placeholder="100" aria-describedby="page-hint">
+              <button class="go-button" type="submit">GO <span aria-hidden="true">↗</span></button>
+            </form>
+            <div class="step-buttons"><button id="prev-button" type="button" aria-label="Previous page">←</button><button id="next-button" type="button" aria-label="Next page">→</button></div>
+          </div>
+          <div id="page-hint" class="screen-status" role="status" aria-live="polite">YOU ARE VIEWING PAGE 100</div>
+        </section>
+
+        <aside class="channel-card" aria-labelledby="channels-heading">
+          <div class="card-header"><span class="card-kicker">/ INDEX</span><span class="card-decoration">✳</span></div>
+          <h2 id="channels-heading">EXPLORE<br>CHANNELS<span class="accent">.</span></h2>
+          <nav id="channel-nav" aria-label="Teletext channel index">
+            <a href="#100" data-page="100"><span>100</span><strong>Home</strong><span aria-hidden="true">↗</span></a>
+            <a href="#101" data-page="101"><span>101</span><strong>News</strong><span aria-hidden="true">↗</span></a>
+            <a href="#120" data-page="120"><span>120</span><strong>Technology</strong><span aria-hidden="true">↗</span></a>
+            <a href="#200" data-page="200"><span>200</span><strong>Weather</strong><span aria-hidden="true">↗</span></a>
+            <a href="#300" data-page="300"><span>300</span><strong>Archive</strong><span aria-hidden="true">↗</span></a>
+            <a href="#400" data-page="400"><span>400</span><strong>Help</strong><span aria-hidden="true">↗</span></a>
+          </nav>
+          <p class="card-footnote">A FAMILIAR INTERFACE.<br>A WHOLE NEW SIGNAL.</p>
+        </aside>
+      </main>
+      <footer class="site-footer"><span>© 2026 TELEGHOST</span><span>BUILT FOR KIROWEEN 2026 · RESURRECTION</span><span>NO DATA TRACKING. JUST PIXELS.</span></footer>
+    </div>
+    <script type="module" src="./app.mjs"></script>
+  </body>
+</html>

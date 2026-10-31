@@ -1,0 +1,12 @@
+{
+  "name": "teleghost",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A Teletext-inspired modern information terminal",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test",
+    "check": "node --check app.mjs && node --check pages.mjs && node --check server.mjs"
+  }
+}
