@@ -8,4 +8,5 @@
 
 - Goal: Build TeleGhost for Kiroween 2026, Resurrection category.
 - The local version has numbered channels, a Teletext archive, and model conditions for Oslo, London and Tokyo. Weather comes from Open-Meteo.
-- Kiro Web implemented the service worker and offline status. The browser checks confirmed a cached archive under /teleghost/ and unavailable weather offline. Public hosting and the Devpost entry are pending.
+- Kiro Web implemented the service worker and offline status. The browser checks confirmed a cached archive under /teleghost/ and unavailable weather offline.
+- The app and video are public. Devpost contains a saved Resurrection draft for the user to review before submitting.

@@ -2,6 +2,8 @@
 
 TeleGhost brings the numbered pages of television Teletext to the web. It is an entry in the **Resurrection** category at **Kiroween 2026**.
 
+[Open the web app](https://9588xiong-dotcom.github.io/teleghost/) · [Watch the demo](https://youtu.be/DPKETdNzXDU)
+
 ## Run locally
 
 Requires Node.js 20+; no dependencies, API keys, or build step.
