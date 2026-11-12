@@ -10,15 +10,14 @@ Acceptance criteria:
 - Mobile users can navigate without a keyboard.
 - Focus indicators and screen-reader status messages are available.
 
-## User story 2 — Read useful current news
+## User story 2 — Learn how Teletext worked
 
-As a visitor, I can read the latest headlines from clearly credited RSS sources.
+As a visitor, I can find a station index and open a short archive about television Teletext.
 
 Acceptance criteria:
-- A server-side endpoint fetches configured approved RSS feeds with timeouts and caching.
-- Headlines link to the original publisher and include published/updated timestamps.
-- User content is escaped or rendered safely; external links use safe target attributes.
-- Network failures show an honest stale-data or offline status.
+- The station bulletin explains what is available by page number.
+- The archive explains how page numbers and broadcast data worked and credits the historical source.
+- Archive and help use the same keyboard and touch controls as the rest of the terminal.
 
 ## User story 3 — Find local weather
 
@@ -34,6 +33,6 @@ Acceptance criteria:
 As a visitor, I can reopen cached channels offline and tell when content was last updated.
 
 Acceptance criteria:
-- The app shell works after a prior successful visit.
-- Offline content is clearly marked as cached or sample data.
-- Tests cover navigation, failure states and accessibility-critical controls.
+- After the app announces its offline copy is ready, a direct reload of page 300 works under `/teleghost/` even if the app server is unreachable.
+- The cache is scoped to the static application shell. Weather requests bypass it.
+- The footer announces when the offline copy is ready or the browser is offline. Weather failures show an unavailable state.

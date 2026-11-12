@@ -1,11 +1,7 @@
-# Kiro implementation tasks
+# TeleGhost release tasks
 
-This file describes **future work to perform using Kiro**. Check tasks off only after implementing and verifying them there.
-
-- [ ] Implement server-side RSS fetching, validation, attribution, caching and failure tests.
-- [ ] Implement a user-selected weather city with real data source, update time and units.
-- [ ] Add favorites/settings persistence and an offline service worker.
-- [ ] Add accessibility review and tests for keyboard and mobile navigation.
-- [ ] Document actual Kiro IDE/CLI usage, specs, steering and any hooks created.
-- [ ] Deploy a working public app and verify mobile and desktop behavior.
-- [ ] Create a demo video of less than 3 minutes and prepare truthful Devpost submission.
+- [x] Implement numbered navigation, shareable pages, and a Teletext archive.
+- [x] Add city selection and show the source, local timestamp, and units for model weather.
+- [x] Use Kiro Web to implement the offline shell and status from user story 4.
+- [x] Verify that page 300 reloads at the deployment subpath while the server is unavailable.
+- [x] Verify the public site and record the demo for Devpost.

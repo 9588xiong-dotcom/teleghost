@@ -1,23 +1,17 @@
 # Design
 
-## Existing starter
+## Static application
 
 - `server.mjs`: minimal dependency-free HTTP static file server.
-- `pages.mjs`: static demonstration page data and pure page-navigation helpers.
-- `app.mjs`: event handling, keyboard buffer, clock and rendering into safe DOM nodes.
+- `pages.mjs`: channel content and page-navigation helpers.
+- `app.mjs`: keyboard navigation, weather view and rendering.
 - `index.html` + `styles.css`: semantic responsive Teletext interface.
+- `weather.mjs`: requests model conditions for a fixed set of cities from Open-Meteo and checks units and timestamps.
 
-## Proposed Kiro implementation
+## Offline design from Kiro Web
 
-- Introduce server-side `/api/news` and `/api/weather` endpoints with validation, caching and bounded network calls.
-- Define a normalized information-channel schema: `{number, title, source, updatedAt, status, items}`.
-- Preserve static demo pages only as an explicit preview or connection-failure fallback.
-- Add a service worker for offline assets; cache response metadata to distinguish current from stale content.
-- Keep a zero-dependency starting point. Add dependencies only with a clear justification.
+- `sw.js` precaches the same-origin shell. The cache name includes the service worker scope and release version. Old caches are removed only within that scope.
+- `offline.mjs` registers the worker using relative paths and updates a polite status message when its own worker takes control. Numbered links use URL fragments, so the same cached document can render any channel.
+- Weather remains a network request and reports failures instead of displaying stale values as current. The project uses no build step or API keys.
 
-## Design constraints
-
-- Do not expose third-party API keys to the browser.
-- Never display untrusted HTML from feed entries. Insert text using `textContent`.
-- Avoid claiming data is live unless sourced and timestamped.
-- Include tests for HTTP failures, malformed feed data and accessibility navigation.
+The implementation came from a Kiro Web session that used the offline user story as input. To verify it, load the app from its project subpath, wait for the ready message, take the app server offline, and reopen page 300. Check that the page is still usable and that a failed weather request shows an unavailable state.
