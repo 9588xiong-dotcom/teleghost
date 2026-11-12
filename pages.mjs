@@ -7,28 +7,28 @@ export const PAGES = Object.freeze([
     eyebrow: 'THE INFORMATION AGE, REWOUND',
     intro: 'THE PAST IS ONLINE AGAIN.',
     lines: [
-      ['101', 'NEWS', 'Headlines, with a retro twist'],
+      ['101', 'BULLETIN', 'What is on the station today'],
       ['120', 'TECH', 'Technology through the decades'],
-      ['200', 'WEATHER', 'Forecast channel preview'],
+      ['200', 'WEATHER', 'Current conditions in three cities'],
       ['300', 'ARCHIVE', 'A brief history of Teletext'],
       ['400', 'HELP', 'How to use this terminal']
     ],
-    note: 'DEMO EDITION · Select a channel to continue.'
+    note: 'SELECT A CHANNEL TO CONTINUE.'
   },
   {
     number: 101,
-    title: 'NEWS DESK',
-    section: 'HEADLINES',
+    title: 'STATION BULLETIN',
+    section: 'PROGRAMME GUIDE',
     color: 'yellow',
-    eyebrow: 'SAMPLE BULLETIN',
-    intro: 'YOUR WINDOW ON THE WORLD',
+    eyebrow: 'FROM THE TELEGHOST DESK',
+    intro: 'WHAT TO TUNE IN TO',
     lines: [
-      ['01', 'RETRO', 'Teletext-style navigation returns'],
-      ['02', 'DESIGN', 'Small interfaces, big personality'],
-      ['03', 'WEB', 'Keyboard-first browsing matters'],
-      ['04', 'NEXT', 'Real RSS feeds are on the roadmap']
+      ['120', 'TECH', 'How TV signals carried text pages'],
+      ['200', 'WEATHER', 'Choose a city and check current conditions'],
+      ['300', 'ARCHIVE', 'From Ceefax to a browser tab'],
+      ['400', 'CONTROLS', 'Use your keyboard as a remote']
     ],
-    note: 'SAMPLE CONTENT · These are not live news headlines.'
+    note: 'TYPE ANY LISTED PAGE NUMBER AND PRESS ENTER.'
   },
   {
     number: 120,
@@ -50,15 +50,10 @@ export const PAGES = Object.freeze([
     title: 'WEATHER SERVICE',
     section: 'WEATHER',
     color: 'green',
-    eyebrow: 'PREVIEW MODE',
-    intro: 'FORECAST CONNECTION PENDING',
-    lines: [
-      ['OSLO', '—', 'Live weather not connected'],
-      ['LONDON', '—', 'Live weather not connected'],
-      ['TOKYO', '—', 'Live weather not connected'],
-      ['SOURCE', '—', 'Real API integration planned']
-    ],
-    note: 'NO LIVE WEATHER DATA · This is a UI preview.'
+    eyebrow: 'CURRENT MODEL CONDITIONS',
+    intro: 'CHOOSE A CITY',
+    lines: [],
+    note: 'The timestamp is local to the selected city.'
   },
   {
     number: 300,
@@ -68,10 +63,10 @@ export const PAGES = Object.freeze([
     eyebrow: 'THE GHOST IN THE TELEVISION',
     intro: 'BEFORE THE WEB, THERE WERE PAGES.',
     lines: [
-      ['WHAT', 'TELETEXT', 'Text and graphics broadcast with TV'],
-      ['HOW', 'PAGES', 'Three-digit numbers for quick access'],
-      ['WHY', 'SPEED', 'A lightweight, direct information format'],
-      ['NOW', 'REVIVAL', 'Reimagined for today\'s devices']
+      ['1974', 'CEEFAX', 'The BBC starts its teletext service'],
+      ['SIGNAL', 'PAGES', 'Data rides in the television broadcast'],
+      ['REMOTE', 'INDEX', 'Three digits select a numbered page'],
+      ['TODAY', 'BROWSER', 'TeleGhost gives those numbers shareable links']
     ],
     note: 'INSPIRED BY TELETEXT · No original broadcaster assets used.'
   },

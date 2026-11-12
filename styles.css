@@ -77,7 +77,17 @@ button { cursor: pointer; }
 .section-label { font-size: 10px; color: #8795ab; margin-top: 8px; }
 .page-intro { color: #e6ebf5; font-size: 12px; line-height: 1.6; margin-bottom: 19px; }
 .page-list { min-height: 135px; }
-.teletext-row { display: grid; grid-template-columns: minmax(48px, 60px) minmax(72px, 92px) 1fr; gap: 8px; border-top: 1px solid rgba(255,255,255,.065); padding: 9px 0; align-items: start; font-size: 10px; line-height: 1.5; }
+.weather-panel { min-height: 135px; color: #d9e3f2; font-size: 11px; }
+.weather-city { display: flex; align-items: center; gap: 12px; }
+.weather-city select, .weather-retry { min-height: 36px; padding: 5px 9px; border: 1px solid #475972; border-radius: 5px; background: #131d2a; color: #ecf2fb; font: inherit; }
+.weather-status { color: #a8b9ce; line-height: 1.55; min-height: 1.55em; margin: 10px 0; }
+.weather-values { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; margin: 10px 0; }
+.weather-values[hidden] { display: none; }
+.weather-values div { border-top: 1px solid #344259; padding-top: 6px; }
+.weather-values dt { color: #a8b9ce; font-size: 10px; }
+.weather-values dd { color: #9de690; font-size: clamp(12px, 1.2vw, 17px); margin: 4px 0 0; }
+.weather-source { display: block; width: fit-content; color: #88d7e3; text-decoration: underline; margin-top: 9px; }
+.teletext-row { display: grid; grid-template-columns: minmax(48px, 60px) minmax(72px, 92px) 1fr; gap: 8px; border-top: 1px solid rgba(255,255,255,.065); padding: 9px 0; align-items: start; font-size: 11px; line-height: 1.5; }
 .row-number { color: #ffe474; }
 .row-category { color: #76dce3; }
 .row-title { color: #c7d0de; }
@@ -114,6 +124,8 @@ button { cursor: pointer; }
 #channel-nav a[aria-current="page"] span:first-child { color: var(--lime); }
 .card-footnote { margin-top: 29px; color: #738299; font: 9px/2 var(--mono); }
 .site-footer { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; border-top: 1px solid var(--border); margin-top: 90px; padding: 25px 0 35px; color: #647489; font: 9px var(--mono); letter-spacing: .07em; }
+.offline-status { color: #aebdd1; font-size: 11px; letter-spacing: normal; }
+.offline-status[data-state="offline"] { color: var(--lime); }
 
 @media (max-width: 1250px) {
   .app-shell { padding: 0 35px; }
@@ -148,7 +160,7 @@ button { cursor: pointer; }
   .screen { padding: 18px 13px 12px; min-height: 429px; }
   .page-heading { margin: 28px 0 17px; }
   .page-heading h2 { font-size: 25px; }
-  .teletext-row { grid-template-columns: 43px 76px 1fr; gap: 5px; font-size: 9px; }
+  .teletext-row { grid-template-columns: 43px 76px minmax(0, 1fr); gap: 5px; font-size: 10px; }
   .controls { flex-wrap: wrap; padding: 15px 4px 9px; }
   .controls-intro { width: 100%; padding-bottom: 0; }
   .controls-hint { display: none; }

@@ -1,4 +1,5 @@
 import { adjacentPage, appendDigit, lookupPage } from './pages.mjs';
+import { loadCurrentConditions } from './weather.mjs';
 
 const elements = {
   form: document.querySelector('#page-form'),
@@ -15,8 +16,61 @@ const elements = {
   clock: document.querySelector('#clock')
 };
 
+const weather = {
+  panel: document.querySelector('#weather-panel'),
+  city: document.querySelector('#weather-city'),
+  status: document.querySelector('#weather-status'),
+  values: document.querySelector('#weather-values'),
+  temperature: document.querySelector('#weather-temperature'),
+  feelsLike: document.querySelector('#weather-feels-like'),
+  wind: document.querySelector('#weather-wind'),
+  retry: document.querySelector('#weather-retry')
+};
+
 let currentPage = 100;
 let pageBuffer = '';
+let weatherRequest;
+
+async function refreshWeather() {
+  weatherRequest?.abort();
+  const controller = new AbortController();
+  weatherRequest = controller;
+  const cityName = weather.city.selectedOptions[0].textContent;
+  weather.values.hidden = true;
+  weather.retry.hidden = true;
+  weather.status.textContent = `Loading conditions for ${cityName}…`;
+  const timeout = setTimeout(() => controller.abort(), 7000);
+
+  try {
+    const conditions = await loadCurrentConditions(weather.city.value, { signal: controller.signal });
+    if (weatherRequest !== controller) return;
+    weather.temperature.textContent = `${conditions.temperature} °C`;
+    weather.feelsLike.textContent = `${conditions.feelsLike} °C`;
+    weather.wind.textContent = `${conditions.wind} km/h`;
+    weather.status.textContent = `${conditions.summary} · ${conditions.localTime} (${conditions.timezone})`;
+    weather.values.hidden = false;
+  } catch {
+    if (weatherRequest !== controller) return;
+    weather.status.textContent = `Conditions for ${cityName} are unavailable.`;
+    weather.retry.hidden = false;
+  } finally {
+    clearTimeout(timeout);
+    if (weatherRequest === controller) weatherRequest = undefined;
+  }
+}
+
+function setWeatherVisible(visible) {
+  if (visible === !weather.panel.hidden) return;
+  weather.panel.hidden = !visible;
+  elements.list.hidden = visible;
+  if (visible) {
+    refreshWeather();
+  } else {
+    const previousRequest = weatherRequest;
+    weatherRequest = undefined;
+    previousRequest?.abort();
+  }
+}
 
 function showPage(number, updateHash = true) {
   const page = lookupPage(number);
@@ -37,6 +91,7 @@ function showPage(number, updateHash = true) {
   elements.intro.textContent = page.intro;
   elements.note.textContent = page.note;
   elements.list.replaceChildren();
+  setWeatherVisible(page.number === 200);
 
   for (const [number, category, title] of page.lines) {
     const row = document.createElement('div');
@@ -61,9 +116,19 @@ function showPage(number, updateHash = true) {
 }
 
 function goToHash() {
-  const target = location.hash.replace('#', '').trim();
-  if (target) showPage(target, false);
-  else showPage(100, false);
+  const target = location.hash.slice(1);
+  if (!target) {
+    showPage(100, false);
+    return;
+  }
+  if (/^\d{3}$/.test(target) && lookupPage(target)) {
+    showPage(target, false);
+    return;
+  }
+
+  showPage(100, false);
+  history.replaceState(history.state, '', '#100');
+  elements.status.textContent = 'PAGE LINK NOT FOUND · SHOWING PAGE 100';
 }
 
 elements.form.addEventListener('submit', (event) => {
@@ -83,13 +148,14 @@ elements.input.addEventListener('input', () => {
 
 document.querySelector('#prev-button').addEventListener('click', () => showPage(adjacentPage(currentPage, -1)));
 document.querySelector('#next-button').addEventListener('click', () => showPage(adjacentPage(currentPage, 1)));
+weather.city.addEventListener('change', refreshWeather);
+weather.retry.addEventListener('click', refreshWeather);
 window.addEventListener('hashchange', goToHash);
 
 document.addEventListener('keydown', (event) => {
   if (event.altKey || event.ctrlKey || event.metaKey) return;
   const target = event.target;
-  const typing = target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || target?.isContentEditable;
-  if (typing) return;
+  if (target instanceof HTMLElement && (target.matches('input, textarea, select, button') || target.isContentEditable)) return;
 
   if (/^\d$/.test(event.key)) {
     pageBuffer = appendDigit(pageBuffer, event.key);

@@ -18,7 +18,7 @@
           <span>TELE<span class="ghost">GHOST</span></span>
         </a>
         <span class="top-label">THE INTERNET, BEFORE THE INTERNET</span>
-        <span class="edition">ISSUE 001 <span class="signal-dot" aria-hidden="true"></span> <span class="edition-status">DEMO</span></span>
+        <span class="edition">TELETEXT <span class="signal-dot" aria-hidden="true"></span></span>
       </header>
 
       <main class="main-layout">
@@ -43,6 +43,24 @@
               <div class="page-heading"><div class="page-eyebrow" id="page-eyebrow"></div><h2 id="page-title"></h2><div class="section-label" id="section-label"></div></div>
               <div class="page-intro" id="page-intro"></div>
               <div class="page-list" id="page-list" aria-live="off"></div>
+              <div class="weather-panel" id="weather-panel" hidden>
+                <div class="weather-city">
+                  <label for="weather-city">City</label>
+                  <select id="weather-city">
+                    <option value="oslo">Oslo</option>
+                    <option value="london">London</option>
+                    <option value="tokyo">Tokyo</option>
+                  </select>
+                </div>
+                <p class="weather-status" id="weather-status" role="status"></p>
+                <dl class="weather-values" id="weather-values" hidden>
+                  <div><dt>Temperature</dt><dd id="weather-temperature"></dd></div>
+                  <div><dt>Feels like</dt><dd id="weather-feels-like"></dd></div>
+                  <div><dt>Wind</dt><dd id="weather-wind"></dd></div>
+                </dl>
+                <button class="weather-retry" id="weather-retry" type="button" hidden>Try again</button>
+                <a class="weather-source" href="https://open-meteo.com/">Weather data by Open-Meteo</a>
+              </div>
               <div class="page-note" id="page-note"></div>
               <div class="teletext-footer"><span>◀ PREV</span><span>PAGE <span id="page-footer">100</span></span><span>NEXT ▶</span></div>
             </div>
@@ -64,7 +82,7 @@
           <h2 id="channels-heading">EXPLORE<br>CHANNELS<span class="accent">.</span></h2>
           <nav id="channel-nav" aria-label="Teletext channel index">
             <a href="#100" data-page="100"><span>100</span><strong>Home</strong><span aria-hidden="true">↗</span></a>
-            <a href="#101" data-page="101"><span>101</span><strong>News</strong><span aria-hidden="true">↗</span></a>
+            <a href="#101" data-page="101"><span>101</span><strong>Bulletin</strong><span aria-hidden="true">↗</span></a>
             <a href="#120" data-page="120"><span>120</span><strong>Technology</strong><span aria-hidden="true">↗</span></a>
             <a href="#200" data-page="200"><span>200</span><strong>Weather</strong><span aria-hidden="true">↗</span></a>
             <a href="#300" data-page="300"><span>300</span><strong>Archive</strong><span aria-hidden="true">↗</span></a>
@@ -73,8 +91,13 @@
           <p class="card-footnote">A FAMILIAR INTERFACE.<br>A WHOLE NEW SIGNAL.</p>
         </aside>
       </main>
-      <footer class="site-footer"><span>© 2026 TELEGHOST</span><span>BUILT FOR KIROWEEN 2026 · RESURRECTION</span><span>NO DATA TRACKING. JUST PIXELS.</span></footer>
+      <footer class="site-footer">
+        <span>© 2026 TELEGHOST</span>
+        <span id="offline-status" class="offline-status" role="status" aria-live="polite"></span>
+        <span>BUILT FOR KIROWEEN 2026 · RESURRECTION</span>
+      </footer>
     </div>
     <script type="module" src="./app.mjs"></script>
+    <script type="module" src="./offline.mjs"></script>
   </body>
 </html>

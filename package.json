@@ -7,6 +7,6 @@
   "scripts": {
     "start": "node server.mjs",
     "test": "node --test",
-    "check": "node --check app.mjs && node --check pages.mjs && node --check server.mjs"
+    "check": "node --check app.mjs && node --check pages.mjs && node --check weather.mjs && node --check offline.mjs && node --check sw.js && node --check server.mjs"
   }
 }

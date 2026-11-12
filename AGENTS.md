@@ -1,11 +1,11 @@
 ## Gotchas
 
-- Devpost requires meaningful Kiro use -> Complete and document work through Kiro before submitting; this starter alone does not establish eligibility.
-- The static pages contain demo content -> Label it clearly and replace it with real integrations before claiming live data.
+- Devpost asks how Kiro was used -> Refer to the project spec and the offline implementation when completing the entry.
+- Weather unavailable -> The browser may be offline or the provider may be down -> Use Try again on page 200.
+- An old page persists after an update -> The service worker caches the release -> Bump VERSION in sw.js when changing a shell file.
 
 ## State
 
 - Goal: Build TeleGhost for Kiroween 2026, Resurrection category.
-- This starter provides an accessible, working Teletext-inspired web UI with sample channels.
-- Next Kiro tasks: implement real news/weather feeds, offline support, testing, deployment and a demo.
-- The project needs a public GitHub repository and working hosted URL before Devpost submission.
+- The local version has numbered channels, a Teletext archive, and model conditions for Oslo, London and Tokyo. Weather comes from Open-Meteo.
+- Kiro Web implemented the service worker and offline status. The browser checks confirmed a cached archive under /teleghost/ and unavailable weather offline. Public hosting and the Devpost entry are pending.
