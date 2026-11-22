@@ -4,12 +4,15 @@ import { dirname, extname, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = dirname(fileURLToPath(import.meta.url));
+const basePath = process.env.BASE_PATH || '/';
+if (!/^\/(?:[a-zA-Z0-9_-]+\/)*$/.test(basePath)) throw new Error('BASE_PATH must be / or a path such as /teleghost/');
 const mime = {
   '.html': 'text/html; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
   '.mjs': 'text/javascript; charset=utf-8',
   '.js': 'text/javascript; charset=utf-8',
-  '.ico': 'image/x-icon'
+  '.ico': 'image/x-icon',
+  '.svg': 'image/svg+xml'
 };
 
 const server = createServer(async (req, res) => {
@@ -25,6 +28,8 @@ const server = createServer(async (req, res) => {
     res.writeHead(400).end('Bad request');
     return;
   }
+  if (!pathname.startsWith(basePath)) { res.writeHead(404).end('Not found'); return; }
+  pathname = '/' + pathname.slice(basePath.length);
   const localPath = resolve(root, `.${pathname === '/' ? '/index.html' : pathname}`);
   if (!localPath.startsWith(`${root}${sep}`) || /(^|[\\/])\./.test(localPath.slice(root.length))) {
     res.writeHead(403).end('Forbidden');
@@ -48,5 +53,5 @@ const server = createServer(async (req, res) => {
 
 const port = Number(process.env.PORT) || 4173;
 server.listen(port, '127.0.0.1', () => {
-  console.log(`TeleGhost is running at http://127.0.0.1:${port}`);
+  console.log(`TeleGhost is running at http://127.0.0.1:${port}${basePath}`);
 });

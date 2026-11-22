@@ -5,15 +5,15 @@ export const PAGES = Object.freeze([
     section: 'WELCOME',
     color: 'cyan',
     eyebrow: 'THE INFORMATION AGE, REWOUND',
-    intro: 'THE PAST IS ONLINE AGAIN.',
+    intro: 'YOUR COMMUNITY. YOUR FREQUENCY.',
     lines: [
-      ['101', 'BULLETIN', 'What is on the station today'],
-      ['120', 'TECH', 'Technology through the decades'],
+      ['150', 'ON AIR', 'Read a pocket-sized community bulletin'],
+      ['500', 'CREATE', 'Write one. Share it. Keep it offline.'],
       ['200', 'WEATHER', 'Current conditions in three cities'],
       ['300', 'ARCHIVE', 'A brief history of Teletext'],
       ['400', 'HELP', 'How to use this terminal']
     ],
-    note: 'SELECT A CHANNEL TO CONTINUE.'
+    note: 'TAP A ROW OR TYPE THREE DIGITS + ENTER.'
   },
   {
     number: 101,
@@ -23,12 +23,18 @@ export const PAGES = Object.freeze([
     eyebrow: 'FROM THE TELEGHOST DESK',
     intro: 'WHAT TO TUNE IN TO',
     lines: [
-      ['120', 'TECH', 'How TV signals carried text pages'],
+      ['150', 'ON AIR', 'Your saved bulletin, or an example'],
+      ['500', 'STUDIO', 'Make a shareable community page'],
       ['200', 'WEATHER', 'Choose a city and check current conditions'],
       ['300', 'ARCHIVE', 'From Ceefax to a browser tab'],
       ['400', 'CONTROLS', 'Use your keyboard as a remote']
     ],
     note: 'TYPE ANY LISTED PAGE NUMBER AND PRESS ENTER.'
+  },
+  {
+    number: 150, title: 'COMMUNITY SIGNAL', section: 'POCKET BULLETIN', color: 'magenta',
+    eyebrow: 'SMALL ENOUGH TO PASS ON', intro: '', lines: [],
+    note: 'A saved page, not a live feed. Edit your own in STUDIO / 500.'
   },
   {
     number: 120,
@@ -53,7 +59,7 @@ export const PAGES = Object.freeze([
     eyebrow: 'CURRENT MODEL CONDITIONS',
     intro: 'CHOOSE A CITY',
     lines: [],
-    note: 'The timestamp is local to the selected city.'
+    note: 'Model conditions, not a station observation. Saved snapshots expire after 24 hours. The timestamp is local to the selected city.'
   },
   {
     number: 300,
@@ -84,11 +90,16 @@ export const PAGES = Object.freeze([
       ['ESC', 'CANCEL', 'Clear a partly entered number'],
       ['BUTTONS', 'TAP', 'Touch-friendly navigation is supported']
     ],
-    note: 'PRESS 100 TO RETURN HOME.'
+    note: 'Reading mode removes screen effects and increases text size. Saved pages require an initial online visit; browser storage can be cleared by your browser.'
+  },
+  {
+    number: 500, title: 'BROADCAST STUDIO', section: 'MAKE YOUR OWN SIGNAL', color: 'magenta',
+    eyebrow: 'FROM VIEWER TO BROADCASTER', intro: 'ONE PAGE. SOMETHING WORTH SHARING.', lines: [],
+    note: 'A small format with a long memory.'
   }
 ]);
 
-export const PAGE_NUMBERS = Object.freeze(PAGES.map((page) => page.number));
+export const PAGE_NUMBERS = Object.freeze(PAGES.map((page) => page.number).sort((a, b) => a - b));
 
 export function lookupPage(input) {
   const number = Number(input);

@@ -1,12 +1,12 @@
 {
   "name": "teleghost",
-  "version": "0.1.0",
+  "version": "0.4.0",
   "private": true,
   "type": "module",
   "description": "A Teletext-inspired modern information terminal",
   "scripts": {
     "start": "node server.mjs",
     "test": "node --test",
-    "check": "node --check app.mjs && node --check pages.mjs && node --check weather.mjs && node --check offline.mjs && node --check sw.js && node --check server.mjs"
+    "check": "node --check app.mjs && node --check bulletin.mjs && node --check draft.mjs && node --check pages.mjs && node --check weather.mjs && node --check weather-cache.mjs && node --check offline.mjs && node --check sw.js && node --check server.mjs && node --check share-card.mjs && node --check vendor/qrcodegen.mjs"
   }
 }
