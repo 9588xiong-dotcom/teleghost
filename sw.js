@@ -4,13 +4,13 @@
  */
 'use strict';
 
-const VERSION = '2026-11-12.3';
+const VERSION = '2026-11-15.2';
 const BASE = new URL('./', self.location.href).href; // e.g. https://user.github.io/teleghost/
 const CACHE_PREFIX = `teleghost-shell|${self.registration.scope}|`;
 const CACHE_NAME = CACHE_PREFIX + VERSION;
 
 const SHELL_URLS = new Set(
-  ['./', './index.html', './styles.css', './app.mjs', './pages.mjs', './weather.mjs', './offline.mjs']
+  ['./', './index.html', './styles.css', './app.mjs', './pages.mjs', './weather.mjs', './weather-cache.mjs', './bulletin.mjs', './draft.mjs', './share-card.mjs', './vendor/qrcodegen.mjs', './offline.mjs', './icon.svg']
     .map((path) => new URL(path, BASE).href),
 );
 const NAV_URLS = new Set([new URL('./', BASE).href, new URL('./index.html', BASE).href]);

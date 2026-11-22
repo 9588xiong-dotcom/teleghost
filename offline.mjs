@@ -6,8 +6,8 @@ const SCOPE_URL = new URL('./', import.meta.url);
 const MESSAGES = {
   loading: 'Saving TeleGhost for offline use…',
   pending: 'Offline copy saved. It will be used after the next reload.',
-  ready: 'Offline copy ready. Live weather still needs a connection.',
-  offline: 'Offline: showing saved pages. Weather is unavailable.',
+  ready: 'Offline copy ready · your pocket station can travel with you.',
+  offline: 'Offline · saved pages available. Weather may show a dated snapshot.',
   'offline-unsaved': 'Offline: this page is not saved for offline use.',
   unsupported: 'Offline use is not available in this browser.',
   error: 'Offline copy could not be saved. Online use is unaffected.',

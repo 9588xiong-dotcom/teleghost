@@ -4,11 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#090d16">
-    <meta name="description" content="TeleGhost revives the lost art of Teletext in a modern, keyboard-first information terminal.">
+    <meta name="description" content="A little station for your community. Create a Teletext bulletin, share a link, and keep reading when the signal disappears.">
+    <meta name="referrer" content="no-referrer">
+    <link rel="icon" href="./icon.svg" type="image/svg+xml">
     <title>TeleGhost — Teletext Reborn</title>
     <link rel="stylesheet" href="./styles.css">
   </head>
   <body>
+    <a class="skip-link" href="#terminal">Skip to terminal</a>
     <div class="ambient ambient-one" aria-hidden="true"></div>
     <div class="ambient ambient-two" aria-hidden="true"></div>
     <div class="app-shell">
@@ -17,19 +20,22 @@
           <span class="brand-icon" aria-hidden="true">▣</span>
           <span>TELE<span class="ghost">GHOST</span></span>
         </a>
-        <span class="top-label">THE INTERNET, BEFORE THE INTERNET</span>
-        <span class="edition">TELETEXT <span class="signal-dot" aria-hidden="true"></span></span>
+        <span class="top-label">SMALL PAGES. LASTING SIGNAL.</span>
+        <button class="view-toggle" id="reading-mode" aria-pressed="false" type="button">Reading mode</button>
       </header>
 
       <main class="main-layout">
         <section class="hero" aria-labelledby="hero-title">
           <div class="eyebrow"><span class="eyebrow-line" aria-hidden="true"></span> RESURRECTION / 2026</div>
-          <h1 id="hero-title">THE PAST<br>IS <em>ONLINE.</em></h1>
-          <p>The lost art of Teletext, reimagined for the modern web. Numbered pages. Zero distractions. Pure information.</p>
+          <h1 id="hero-title">OLD SIGNAL.<br><em>NEW LIFE.</em></h1>
+          <p>A little station for your community. Write a bulletin. Put its QR card on the noticeboard. Keep a copy when the signal disappears.</p>
+          <a class="hero-cta" href="#500">Create your bulletin <span aria-hidden="true">↗</span></a>
+          <a class="hero-secondary" id="hero-bulletin-link" href="#150">Tune in to an example →</a>
+          <div class="hero-facts"><span>NO ACCOUNT</span><span>NO FEED</span><span>YOURS TO KEEP</span></div>
           <div class="hero-tip"><span class="tip-prompt" aria-hidden="true">&gt;_</span> TYPE A 3-DIGIT PAGE NUMBER TO BEGIN</div>
         </section>
 
-        <section class="terminal-frame" aria-label="Interactive Teletext terminal">
+        <section class="terminal-frame" id="terminal" tabindex="-1" aria-label="Interactive Teletext terminal">
           <div class="frame-top"><span class="frame-id">TG–01 / INFORMATION TERMINAL</span><span class="frame-lights" aria-hidden="true"><i></i><i></i><i></i></span></div>
           <div class="screen">
             <div class="scanlines" aria-hidden="true"></div>
@@ -43,6 +49,41 @@
               <div class="page-heading"><div class="page-eyebrow" id="page-eyebrow"></div><h2 id="page-title"></h2><div class="section-label" id="section-label"></div></div>
               <div class="page-intro" id="page-intro"></div>
               <div class="page-list" id="page-list" aria-live="off"></div>
+              <section id="bulletin-panel" class="bulletin-panel" aria-label="Community bulletin" hidden>
+                <div class="packet-meta"><span id="bulletin-origin"></span><span id="bulletin-size"></span></div>
+                <div class="broadcast-art" aria-hidden="true"><span>▟▙ ▟▙</span><span>▜████▛</span><span> ▀ ▀ </span></div>
+                <h3 id="bulletin-title"></h3>
+                <div id="bulletin-body" class="bulletin-body"></div>
+                <p id="bulletin-date" class="fine-print"></p>
+                <div class="action-row">
+                  <button id="save-received" type="button">Keep on this device</button>
+                  <button id="share-bulletin" type="button">Copy share link</button>
+                  <button id="open-signal-card" type="button">QR &amp; print card</button>
+                  <button id="download-bulletin" type="button">Download .txt</button>
+                  <button id="edit-bulletin" type="button">Edit this bulletin</button>
+                </div>
+                <a id="saved-bulletin-link" class="hero-secondary" href="#150" hidden>Open your saved bulletin →</a>
+                <p class="fine-print">Shared links hold a fixed copy. Anyone with the link can read it. Sender names are self-declared.</p>
+                <label id="share-fallback" hidden>Copy this link<input id="share-link" readonly type="text"></label>
+                <p id="bulletin-status" class="panel-status" role="status"></p>
+              </section>
+              <section id="studio-panel" class="studio-panel" aria-label="Bulletin studio" hidden>
+                <form id="studio-form">
+                  <div class="studio-top"><span>01 / MAKE IT YOURS</span><button id="load-example" type="button">Load example</button></div>
+                  <label for="station-name">Station name <span>24 characters</span></label>
+                  <input id="station-name" required placeholder="YOUR COMMUNITY">
+                  <label for="bulletin-heading">Headline <span>40 characters</span></label>
+                  <input id="bulletin-heading" required placeholder="WHAT'S HAPPENING?">
+                  <label for="bulletin-text">Your bulletin <span>480 characters</span></label>
+                  <textarea id="bulletin-text" rows="7" required placeholder="A meetup. A notice. A reason to come together." aria-describedby="studio-meter"></textarea>
+                  <p id="studio-meter" class="fine-print">0 / 480 characters · 0 / 16 lines</p>
+                  <details><summary>Preview your broadcast</summary><div id="studio-preview" class="studio-preview"></div></details>
+                  <div class="action-row"><button class="primary-action" type="submit">Save & tune in →</button><button id="preview-unsaved" type="button">View without saving</button><button id="reset-studio" type="button">Reset editor</button></div>
+                  <p class="fine-print">Drafts are backed up on this device when storage is available. Saving replaces your one saved bulletin. Share a new link after editing; older links stay unchanged.</p>
+                  <p id="draft-status" class="fine-print" role="status"></p>
+                  <p id="studio-status" class="panel-status" role="status"></p>
+                </form>
+              </section>
               <div class="weather-panel" id="weather-panel" hidden>
                 <div class="weather-city">
                   <label for="weather-city">City</label>
@@ -75,6 +116,8 @@
             <div class="step-buttons"><button id="prev-button" type="button" aria-label="Previous page">←</button><button id="next-button" type="button" aria-label="Next page">→</button></div>
           </div>
           <div id="page-hint" class="screen-status" role="status" aria-live="polite">YOU ARE VIEWING PAGE 100</div>
+          <p id="offline-status" class="offline-status" role="status" aria-live="polite"></p>
+          <nav class="fasttext" aria-label="Fasttext shortcuts"><a href="#100">Index</a><a href="#150">Bulletin</a><a href="#200">Weather</a><a href="#500">Studio</a></nav>
         </section>
 
         <aside class="channel-card" aria-labelledby="channels-heading">
@@ -84,19 +127,55 @@
             <a href="#100" data-page="100"><span>100</span><strong>Home</strong><span aria-hidden="true">↗</span></a>
             <a href="#101" data-page="101"><span>101</span><strong>Bulletin</strong><span aria-hidden="true">↗</span></a>
             <a href="#120" data-page="120"><span>120</span><strong>Technology</strong><span aria-hidden="true">↗</span></a>
+            <a href="#150" data-page="150"><span>150</span><strong>Your bulletin</strong><span aria-hidden="true">↗</span></a>
             <a href="#200" data-page="200"><span>200</span><strong>Weather</strong><span aria-hidden="true">↗</span></a>
             <a href="#300" data-page="300"><span>300</span><strong>Archive</strong><span aria-hidden="true">↗</span></a>
             <a href="#400" data-page="400"><span>400</span><strong>Help</strong><span aria-hidden="true">↗</span></a>
+            <a href="#500" data-page="500"><span>500</span><strong>Broadcast studio</strong><span aria-hidden="true">↗</span></a>
           </nav>
-          <p class="card-footnote">A FAMILIAR INTERFACE.<br>A WHOLE NEW SIGNAL.</p>
+          <p class="card-footnote">TYPE THREE DIGITS + ENTER.<br>OR JUST TAP A CHANNEL.</p>
         </aside>
       </main>
+      <section class="story-strip" aria-label="How TeleGhost works">
+        <div><span>01 / COMPOSE</span><h2>A page, not a feed.</h2><p>480 characters for what matters. A meetup, a club notice, a neighbourhood update.</p></div>
+        <div><span>02 / PASS IT ON</span><h2>The link is the bulletin.</h2><p>Send a link or print a QR card for the noticeboard. The same short page opens on a phone.</p></div>
+        <div><span>03 / KEEP THE SIGNAL</span><h2>Open once. Keep reading.</h2><p>Save a bulletin to your device. After the offline copy is ready, the station travels with you.</p></div>
+      </section>
       <footer class="site-footer">
         <span>© 2026 TELEGHOST</span>
-        <span id="offline-status" class="offline-status" role="status" aria-live="polite"></span>
         <span>BUILT FOR KIROWEEN 2026 · RESURRECTION</span>
       </footer>
     </div>
+    <dialog id="signal-dialog" aria-labelledby="signal-title" aria-describedby="signal-description">
+      <div class="signal-toolbar">
+        <div><p class="card-kicker">FROM NOTICEBOARD TO POCKET</p><h2 id="signal-title">Pass the signal on.</h2></div>
+        <button id="close-signal-card" type="button" autofocus aria-label="Close share card">Close</button>
+      </div>
+      <p id="signal-description" class="signal-description">A card for your club, library or community space. Print it, or let someone scan your screen.</p>
+      <div class="action-row"><button id="print-signal-card" class="primary-action" type="button">Print / Save PDF</button><button id="copy-card-link" type="button">Copy card link</button><button id="download-qr" type="button">Save QR image</button></div>
+      <article class="signal-card" aria-label="Printable bulletin card">
+        <header class="signal-card-top"><span>TELEGHOST / 150</span><strong id="card-station"></strong></header>
+        <p id="card-example" class="card-example" hidden>FICTIONAL EXAMPLE / NOT A REAL EVENT</p>
+        <h3 id="card-title"></h3>
+        <div id="card-body" class="card-body"></div>
+        <div class="card-keep">
+          <div class="card-code"><img id="card-qr" alt="QR code opening this exact bulletin" width="300" height="300"><p id="card-qr-unavailable" hidden></p></div>
+          <div class="card-guide"><strong id="card-scan-label">SCAN TO KEEP A COPY</strong><p id="card-instructions"></p><p id="card-site"></p></div>
+        </div>
+        <footer><span id="card-created"></span><span>A fixed copy. Sender name is self-declared.</span></footer>
+      </article>
+      <details id="card-link-details"><summary>View the full share link</summary><label for="card-link">Link to this exact copy</label><input id="card-link" type="text" readonly></details>
+      <p class="fine-print">Anyone with this card or link can read the notice. Edits need a new card. Keep the white QR border and try scanning a print before posting it.</p>
+      <p id="card-status" class="panel-status" role="status"></p>
+    </dialog>
+    <dialog id="confirm-dialog" aria-labelledby="confirm-title" aria-describedby="confirm-message">
+      <form method="dialog">
+        <h2 id="confirm-title">Before replacing</h2>
+        <p id="confirm-message"></p>
+        <div class="action-row"><button value="cancel" autofocus>Cancel</button><button id="confirm-action" class="primary-action" value="confirm">Replace</button></div>
+      </form>
+    </dialog>
+    <noscript><p class="noscript">TeleGhost needs JavaScript for the interactive terminal. Enable it to compose and read numbered pages.</p></noscript>
     <script type="module" src="./app.mjs"></script>
     <script type="module" src="./offline.mjs"></script>
   </body>

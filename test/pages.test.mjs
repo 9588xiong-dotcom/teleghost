@@ -13,9 +13,11 @@ test('unknown pages return null', () => {
 });
 
 test('next and previous pages wrap around', () => {
-  assert.equal(adjacentPage(100, -1), 400);
-  assert.equal(adjacentPage(400, 1), 100);
+  assert.equal(adjacentPage(100, -1), 500);
+  assert.equal(adjacentPage(500, 1), 100);
   assert.equal(adjacentPage(101, 1), 120);
+  assert.equal(adjacentPage(120, 1), 150);
+  for (const number of PAGE_NUMBERS) assert.equal(adjacentPage(adjacentPage(number, 1), -1), number);
 });
 
 test('digit buffer only accepts digits and retains the newest three', () => {

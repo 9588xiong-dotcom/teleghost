@@ -1,38 +1,41 @@
 # Requirements
 
-## User story 1 — Find information by page number
+## 1. Tune in
+- Visitors navigate by three digits + Enter, channel links, keyboard arrows and Fasttext shortcuts.
+- Invalid links recover safely; typing inside form fields never triggers global navigation.
+- Touch targets, labelled fields, visible focus and polite page announcements are available.
 
-As a visitor, I can navigate TeleGhost using a three-digit page number, clickable channels, and keyboard controls so the interface feels like classic Teletext.
+## 2. Make a pocket bulletin
+- A club organiser can write a station name, headline and plain-text notice on page 500.
+- Show Unicode character and wrapped-line budgets and a preview before saving.
+- Recover incomplete editor drafts from a separate device-storage slot; report backup failures or changes from other tabs.
+- Provide explicit editing and reset actions; confirm replacement of drafts or a concurrently changed saved bulletin.
+- Preview URLs survive reloading; plain page 150 opens the saved bulletin while browser Back restores the shared copy.
+- Saving opens page 150; storage failure is reported without claiming success.
+- A visitor can view/share/download without local storage being available.
+- Example content is clearly identified as fictional until the visitor chooses to edit/save it.
 
-Acceptance criteria:
-- A valid page number displays the correct content and a clear heading.
-- Unknown page numbers show an explanatory error and available page options.
-- Mobile users can navigate without a keyboard.
-- Focus indicators and screen-reader status messages are available.
+## 3. Pass it on
+- A versioned packet in the URL fragment reconstructs the exact bulletin without a publishing backend.
+- Bound and validate untrusted inputs; render user text as text, not executable markup.
+- Received bulletins are not persisted automatically. Replacing an existing saved page requires a deliberate action.
+- Explain that anyone holding the link can read it, and edits require sharing a new link.
+- Prepare a printable noticeboard card and locally generated QR for a fixed copy; cap QR density and preserve link sharing for larger notices.
+- Label loopback cards as local previews. Wait for the QR image before opening print. Copying/printing an open card must retain its selected snapshot.
+- Export a readable text copy; clipboard denial provides a selectable manual-copy field.
 
-## User story 2 — Learn how Teletext worked
+## 4. Keep the signal
+- Cache the shell under its deployment scope, including every imported browser module.
+- A saved bulletin and static pages reopen when the app server is unreachable after initial caching.
+- Weather stays outside the service-worker cache. Separately save validated city snapshots for at most 24 hours.
+- Failed fetches show a dated SAVED SNAPSHOT or unavailable; never fabricate live conditions.
+- Kiro's snapshot module rejects corrupted data, unsupported cities, future timestamps and denied storage.
 
-As a visitor, I can find a station index and open a short archive about television Teletext.
+## 5. Read comfortably
+- Reading mode enlarges content and removes screen effects; respect reduced motion.
+- On narrow screens, open numbered pages directly at their content, keeping the introductory hero on page 100.
+- Keep offline readiness beside the terminal controls.
+- Support narrow screens without horizontal overflow, and support ordinary browser back/forward.
+- Explain first-visit connectivity, immutable copies, one saved slot and browser-storage limitations.
 
-Acceptance criteria:
-- The station bulletin explains what is available by page number.
-- The archive explains how page numbers and broadcast data worked and credits the historical source.
-- Archive and help use the same keyboard and touch controls as the rest of the terminal.
-
-## User story 3 — Find local weather
-
-As a visitor, I can select a city and see current weather with explicit source and timestamp.
-
-Acceptance criteria:
-- The user chooses a location; no precise location permission is required by default.
-- Forecast data uses a legally permitted public API and clearly labeled units.
-- Missing data is reported as unavailable instead of fabricated.
-
-## User story 4 — Remain useful offline
-
-As a visitor, I can reopen cached channels offline and tell when content was last updated.
-
-Acceptance criteria:
-- After the app announces its offline copy is ready, a direct reload of page 300 works under `/teleghost/` even if the app server is unreachable.
-- The cache is scoped to the static application shell. Weather requests bypass it.
-- The footer announces when the offline copy is ready or the browser is offline. Weather failures show an unavailable state.
+Finishing or resetting an editor must preserve a different draft backed up by another tab. Saving after confirmation must recheck whether the saved copy changed during the dialog and ask again if necessary. Saved-page viewers follow other-tab saves; shared copies remain fixed.

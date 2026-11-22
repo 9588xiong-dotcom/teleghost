@@ -1,12 +1,9 @@
 ## Gotchas
 
-- Devpost asks how Kiro was used -> Refer to the project spec and the offline implementation when completing the entry.
-- Weather unavailable -> The browser may be offline or the provider may be down -> Use Try again on page 200.
-- An old page persists after an update -> The service worker caches the release -> Bump VERSION in sw.js when changing a shell file.
+- Old pages after deployment -> Service worker waits for existing tabs -> Close all TeleGhost tabs and reopen.
 
 ## State
 
-- Goal: Build TeleGhost for Kiroween 2026, Resurrection category.
-- The local version has numbered channels, a Teletext archive, and model conditions for Oslo, London and Tokyo. Weather comes from Open-Meteo.
-- Kiro Web implemented the service worker and offline status. The browser checks confirmed a cached archive under /teleghost/ and unavailable weather offline.
-- The app and video are public. Devpost contains a saved Resurrection draft for the user to review before submitting.
+- TeleGhost is a Kiroween 2026 Resurrection entry for community bulletins. Real-user usefulness remains unvalidated.
+- Kiro Web supplied the initial offline worker/status and weather-cache module/tests; Codex implemented the bulletin and card features. Details: .kiro/BUILD.md.
+- v0.4 has 40 passing Node tests; native printing, QR download, cross-tab card stability and server-stopped reopening of card assets remain to be checked. The original public demo shows v0.1.
